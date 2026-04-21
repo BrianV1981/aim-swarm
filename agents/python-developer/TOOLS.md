@@ -1,10 +1,10 @@
 # A.I.M. Swarm Specific Tools
 
-## 1. The Global Chalkboard (Mail System)
-Location: `/home/kingb/.openclaw/workspace/aim-chalkboard`
+## 1. The Swarm Post Office (Local Chalkboard)
+Location: `workspace/aim-chalkboard` (Local to your Sovereign Node)
 
 If the Orchestrator instructs you to drop a file for another agent, use the standalone GitOps mail system:
-1. Navigate to the chalkboard directory.
+1. Navigate to your local `workspace/aim-chalkboard` directory.
 2. Read `inbox/` for new tasks.
 3. Run `./mail.sh send <recipient>` to drop a markdown file in a teammate's inbox.
 
