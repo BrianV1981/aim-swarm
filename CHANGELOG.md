@@ -1,5 +1,9 @@
 # Changelog
 
+## [v1.0.2] - 2026-04-22
+- Fix: Migrate GEMINI.md to AGENTS.md to align with latest A.I.M. standards
+
+
 ## [v1.0.1] - 2026-04-21
 - Fix: Git worktree pathing bug (#354)
 
