@@ -11,5 +11,14 @@ def test_python_developer_blueprint_exists():
     assert os.path.isdir(os.path.join(blueprint_path, "engrams"))
 
 def test_blueprint_manifest_load():
-    # Placeholder for future manifest validation
-    pass
+    manifest_path = "agents/python-developer/manifest.json"
+    assert os.path.exists(manifest_path)
+    
+    import json
+    with open(manifest_path, "r") as f:
+        manifest = json.load(f)
+        
+    assert "name" in manifest
+    assert "version" in manifest
+    assert manifest["name"] == "Python Developer"
+
