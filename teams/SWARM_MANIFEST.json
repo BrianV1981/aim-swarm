@@ -1,0 +1,17 @@
+{
+  "teams": {
+    "web_dev": {
+      "name": "Web Development Swarm",
+      "members": [
+        {
+          "role": "Frontend Specialist",
+          "dir": "/home/kingb/aim-swarm/teams/frontend"
+        },
+        {
+          "role": "Backend Specialist",
+          "dir": "/home/kingb/aim-swarm/teams/backend"
+        }
+      ]
+    }
+  }
+}
