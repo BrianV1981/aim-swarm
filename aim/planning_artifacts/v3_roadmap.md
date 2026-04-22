@@ -8,13 +8,13 @@ Transition from ephemeral agent directories to permanent, specialized "Fractal E
 ## Ticket 1: The Blueprint Library
 **Title:** Implement the `agents/` Blueprint Library  
 **Context:** Implementing the 'agents/' directory for the V3 Fractal Teams model.  
-**Failure:** Currently lacks a centralized library for specialized agent templates (GEMINI.md, TOOLS.md, engrams/).  
+**Failure:** Currently lacks a centralized library for specialized agent templates (AGENTS.md, TOOLS.md, engrams/).  
 **Intent:** Establish a 'python-developer' template in 'agents/' to serve as the DNA for new fractal clones.  
 
 ### Implementation Steps
 1. Create `/home/kingb/aim-swarm/agents/` directory.
 2. Create `agents/python-developer/` template.
-3. Populate `agents/python-developer/GEMINI.md` with specialized Python role instructions.
+3. Populate `agents/python-developer/AGENTS.md` with specialized Python role instructions.
 4. Populate `agents/python-developer/TOOLS.md` with Python-specific tool definitions.
 5. Create `agents/python-developer/engrams/` for initial RAG seeding.
 

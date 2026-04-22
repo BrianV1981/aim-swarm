@@ -56,7 +56,7 @@ setup_arena() {
     cd "$name"
     
     echo "$TASK_CONTENT" > TASK.md
-    echo "$STANDARD_PROMPT" > GEMINI.md
+    echo "$STANDARD_PROMPT" > AGENTS.md
     
     cd ..
 }

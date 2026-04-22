@@ -6,7 +6,7 @@ import shutil
 def test_python_developer_blueprint_exists():
     blueprint_path = "agents/python-developer"
     assert os.path.isdir(blueprint_path)
-    assert os.path.exists(os.path.join(blueprint_path, "GEMINI.md"))
+    assert os.path.exists(os.path.join(blueprint_path, "AGENTS.md"))
     assert os.path.exists(os.path.join(blueprint_path, "TOOLS.md"))
     assert os.path.isdir(os.path.join(blueprint_path, "engrams"))
 

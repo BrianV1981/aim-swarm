@@ -93,7 +93,7 @@ setup_arena() {
     if [ "$type" == "control" ]; then
         # Control arenas just get the raw code and the prompt at the root
         echo "$TASK_CONTENT" > TASK.md
-        echo "$CONTROL_PROMPT" > GEMINI.md
+        echo "$CONTROL_PROMPT" > AGENTS.md
         
         if [ ! -d "django_repo" ]; then
             git clone --depth 1 --branch "$TARGET_BRANCH" "$REPO_URL" django_repo >/dev/null 2>&1
@@ -117,7 +117,7 @@ setup_arena() {
         ./venv/bin/python3 scripts/aim_cli.py jack-in engrams/django.engram >/dev/null 2>&1
         
         # Inject the specialized prompt
-        echo "$MATRIX_PROMPT" > GEMINI.md
+        echo "$MATRIX_PROMPT" > AGENTS.md
         
         # Build the isolated workspace *inside* aim_os
         mkdir -p workspace

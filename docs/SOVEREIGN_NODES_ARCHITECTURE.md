@@ -20,7 +20,7 @@ Unlike ephemeral agent frameworks that delete the workspace after a task is comp
 ### The `agents/` Directory (Blueprint Library)
 This folder contains the "DNA" for different specialized roles (e.g., `python-developer/`, `frontend-artist/`). It is just a template library.
 A Blueprint Contains:
-*   `GEMINI.md`: The strict persona and operational boundaries.
+*   `AGENTS.md`: The strict persona and operational boundaries.
 *   `engrams/`: Pre-compiled domain knowledge to seed the agent's brain upon creation (e.g., `python_troubleshooting.engram`).
 
 ### The `teams/` Directory (The Active Roster)
@@ -28,7 +28,7 @@ This is where the actual, living A.I.M. installations reside.
 When you "hire" a Python Developer, the factory script:
 1. Performs a full `git clone` of the A.I.M. core repository into `teams/python-developer/`.
 2. Runs a Clean Sweep to wipe the generic brain.
-3. Transplants the Blueprint (`GEMINI.md` and seed `engrams/`) into the clone.
+3. Transplants the Blueprint (`AGENTS.md` and seed `engrams/`) into the clone.
 4. The agent is now a permanent employee.
 
 ---

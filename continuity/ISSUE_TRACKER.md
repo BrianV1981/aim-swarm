@@ -4,7 +4,7 @@
 
 - [ ] **TKT-002: The Blueprint Library**
   - **Context:** Implementing the 'agents/' directory for the V3 Fractal Teams model.
-  - **Failure:** Currently lacks a centralized library for specialized agent templates (GEMINI.md, TOOLS.md, engrams/).
+  - **Failure:** Currently lacks a centralized library for specialized agent templates (AGENTS.md, TOOLS.md, engrams/).
   - **Intent:** Establish a 'python-developer' template in 'agents/' to serve as the DNA for new fractal clones.
 
 - [ ] **TKT-003: The Fractal Factory**
@@ -21,7 +21,7 @@
 
 - [x] **TKT-005: Project Organization & Role Sealing**
   - **Context:** `aim-swarm` needs to be organized for self-hosting.
-  - **Intent:** Moved custom scripts to `swarm/` folder and wrote a tailored `GEMINI.md` defining the role of **Swarm Architect** (Agent who creates agents).
+  - **Intent:** Moved custom scripts to `swarm/` folder and wrote a tailored `AGENTS.md` defining the role of **Swarm Architect** (Agent who creates agents).
 
 - [x] **TKT-001: Architect and implement the Swarm Subagent System (Sovereign Nodes)**
   - **Context:** `aim-swarm` must be modular and independent. 

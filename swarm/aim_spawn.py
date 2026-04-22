@@ -31,7 +31,7 @@ def main():
         node_dir = os.path.join("teams", f"{role_name}_node")
         
     continuity_dir = os.path.join(node_dir, "continuity")
-    gemini_md_path = os.path.join(node_dir, "GEMINI.md")
+    gemini_md_path = os.path.join(node_dir, "AGENTS.md")
     
     # 1. Directory Scaffolding
     try:
@@ -47,7 +47,7 @@ def main():
             f.write(create_template(role_name))
         print(f"Generated {gemini_md_path}")
     except OSError as e:
-        print(f"Error writing GEMINI.md: {e}")
+        print(f"Error writing AGENTS.md: {e}")
         sys.exit(1)
         
     # 3. Git Initialization
