@@ -246,7 +246,7 @@ def cmd_promote(args):
         result = subprocess.run(["git", "branch", "--show-current"], cwd=BASE_DIR, capture_output=True, text=True, check=True)
         current_branch = result.stdout.strip()
         
-        if current_branch == "main":
+        if current_branch == "master":
             print("[ERROR] You are already on 'main'. Please run 'aim promote' from your dev branch.")
             return
             
@@ -261,18 +261,18 @@ def cmd_promote(args):
         date_str = datetime.now().strftime("%Y%m%d-%H%M")
         archive_branch = f"archive-{current_branch}-{date_str}"
         print(f"[2/5] Backing up current 'main' to '{archive_branch}'...")
-        subprocess.run(["git", "checkout", "main"], cwd=repo_root, check=True, capture_output=True, text=True)
+        subprocess.run(["git", "checkout", "master"], cwd=repo_root, check=True, capture_output=True, text=True)
         subprocess.run(["git", "checkout", "-b", archive_branch], cwd=repo_root, check=True, capture_output=True, text=True)
         subprocess.run(["git", "push", "-u", "origin", archive_branch], cwd=repo_root, check=True, capture_output=True, text=True)
         
         # 3. Merge dev branch into main
         print(f"[3/5] Merging '{current_branch}' into main...")
-        subprocess.run(["git", "checkout", "main"], cwd=repo_root, check=True, capture_output=True, text=True)
+        subprocess.run(["git", "checkout", "master"], cwd=repo_root, check=True, capture_output=True, text=True)
         subprocess.run(["git", "merge", current_branch, "--no-edit"], cwd=repo_root, check=True, capture_output=True, text=True)
         
         # 4. Push main
         print(f"[4/5] Deploying new baseline to GitHub...")
-        subprocess.run(["git", "push", "origin", "main"], cwd=repo_root, check=True, capture_output=True, text=True)
+        subprocess.run(["git", "push", "origin", "master"], cwd=repo_root, check=True, capture_output=True, text=True)
         
         # 5. Cleanup
         print(f"[5/5] Cleaning up local workspace...")
@@ -706,7 +706,7 @@ def cmd_update(args):
     try:
         print("[1/3] Syncing with GitHub...")
         subprocess.run(["git", "stash"], check=False)
-        subprocess.run(["git", "pull", "origin", "main"], check=True)
+        subprocess.run(["git", "pull", "origin", "master"], check=True)
         subprocess.run(["git", "stash", "pop"], check=False)
     except Exception as e:
         print(f"[ERROR] Git sync failed: {e}")
