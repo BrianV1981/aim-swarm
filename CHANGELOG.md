@@ -1,5 +1,9 @@
 # Changelog
 
+## [v1.0.3] - 2026-04-22
+- Fix: Implement Blueprint Library Manifest (TKT-002)
+
+
 ## [v1.0.2] - 2026-04-22
 - Fix: Migrate GEMINI.md to AGENTS.md to align with latest A.I.M. standards
 
