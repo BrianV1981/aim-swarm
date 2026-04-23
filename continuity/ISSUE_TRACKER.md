@@ -4,6 +4,11 @@
 
 ## 🔴 COMPLETED ISSUES (Historical)
 
+- [x] **TKT-006: Register tools in Swarm Architect TOOLS.md**
+  - **Context:** The `TOOLS.md` for the Swarm Architect is currently empty.
+  - **Failure:** The agent lacks formal registration of `aim-calc` and `aim-google` tools.
+  - **Intent:** Update `TOOLS.md` to formally document and register these tools.
+
 - [x] **TKT-003: The Fractal Factory**
   - **Context:** The current factory script only creates directories and basic templates.
   - **Failure:** V3 requires each agent to be a full A.I.M. OS clone with its own isolated environment.
