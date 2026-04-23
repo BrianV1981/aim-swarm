@@ -1,5 +1,9 @@
 # Changelog
 
+## [v1.0.7] - 2026-04-23
+- Fix: Register aim-calc and aim-google tools in TOOLS.md (TKT-006)
+
+
 ## [v1.0.6] - 2026-04-22
 - Fix: Add chalkboard initialization and cloning to aim_spawn.py
 
