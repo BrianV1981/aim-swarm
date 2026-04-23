@@ -1,5 +1,9 @@
 # Changelog
 
+## [v1.0.5] - 2026-04-22
+- Fix: Orchestrator Protocol injection in aim_team.py (TKT-004)
+
+
 ## [v1.0.4] - 2026-04-22
 - Fix: Overhaul aim_spawn.py for Fractal Factory (TKT-003)
 
