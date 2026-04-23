@@ -1,5 +1,9 @@
 # Changelog
 
+## [v1.0.6] - 2026-04-22
+- Fix: Add chalkboard initialization and cloning to aim_spawn.py
+
+
 ## [v1.0.5] - 2026-04-22
 - Fix: Orchestrator Protocol injection in aim_team.py (TKT-004)
 
