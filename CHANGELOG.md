@@ -1,5 +1,9 @@
 # Changelog
 
+## [v1.0.4] - 2026-04-22
+- Fix: Overhaul aim_spawn.py for Fractal Factory (TKT-003)
+
+
 ## [v1.0.3] - 2026-04-22
 - Fix: Implement Blueprint Library Manifest (TKT-002)
 
