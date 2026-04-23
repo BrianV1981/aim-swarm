@@ -5,55 +5,47 @@
 ### GEMINI
 **Tool Call:** `run_shell_command`
 ```json
-{"command": "ls -la workspace/"}
+{"command": "cd workspace/dummy_project && python3 ../../scripts/aim_cli.py update --safe", "description": "Testing the safe update option in an isolated non-AIM project to ensure it correctly updates
 ```
 
 ### GEMINI
-**Tool Call:** `run_shell_command`
+**Tool Call:** `grep_search`
 ```json
-{"command": "find . -name aim-chalkboard"}
+{"pattern": "init_script =", "before": 5, "dir_path": "scripts/aim_cli.py"}
 ```
 
 ### GEMINI
-**Tool Call:** `read_file`
+**Tool Call:** `grep_search`
 ```json
-{"file_path": "aim/planning_artifacts/v3_roadmap.md"}
-```
-
-### GEMINI
-**Tool Call:** `run_shell_command`
-```json
-{"command": "git checkout -b fix/chalkboard-integration"}
+{"before": 5, "pattern": "aim_init\\.py", "after": 5, "dir_path": "scripts/aim_cli.py"}
 ```
 
 ### GEMINI
 **Tool Call:** `replace`
 ```json
-{"file_path": "swarm/aim_spawn.py", "allow_multiple": false, "new_string": "def inject_blueprint(node_dir, role_name):\n    blueprint_dir = os.path.join(BASE_DIR, \"agents\", role_name)\n    if not os
+{"instruction": "Update cmd_update to also update SCRIPTS_DIR and VENV_PYTHON globals when --safe is provided.", "old_string": "    # Determine execution context\n    global BASE_DIR\n    is_safe = ge
 ```
+
+### GEMINI
+**Tool Call:** `run_shell_command`
+```json
+{"command": "cd workspace/dummy_project && python3 ../../scripts/aim_cli.py update --safe", "description": "Testing the safe update option again to ensure SCRIPTS_DIR and VENV_PYTHON are resolved corr
+```
+
+### GEMINI
+**Tool Call:** `grep_search`
+```json
+{"pattern": "bootstrap_brain\\.py", "before": 5, "dir_path": "scripts/aim_init.py"}
+```
+
+### INFO
+### USER
+that was 40 minutes, lol, man, this has been atrocious with these long waits. I asked you to simply update the aim os...
 
 ### GEMINI
 **Tool Call:** `replace`
 ```json
-{"old_string": "        clone_aim_core(node_dir)\n        inject_blueprint(node_dir, role_name)\n        \n        # Git Initialization", "instruction": "Call `setup_chalkboard` after `inject_blueprin
-```
-
-### GEMINI
-**Tool Call:** `run_shell_command`
-```json
-{"command": "python3 swarm/aim_spawn.py python-developer --output_dir teams/test-node2"}
-```
-
-### GEMINI
-**Tool Call:** `list_directory`
-```json
-{"dir_path": "teams/test-node2/workspace/aim-chalkboard"}
-```
-
-### GEMINI
-**Tool Call:** `run_shell_command`
-```json
-{"command": "ls -la teams/test-node2/workspace/aim-chalkboard"}
+{"old_string": "    # 3. Refresh Hooks (Interactive)\n    try:\n        print(\"[3/3] Triggering A.I.M. Initializer...\")\n        subprocess.run([VENV_PYTHON, os.path.join(SCRIPTS_DIR, \"aim_init.py\
 ```
 
 ### GEMINI
