@@ -701,13 +701,29 @@ def cmd_uninstall(args):
 def cmd_update(args):
     """Safely pulls latest code, ingests sync data, and re-registers hooks."""
     print("--- A.I.M. SOVEREIGN UPDATE ---")
+
+    # Determine execution context
+    global BASE_DIR, SCRIPTS_DIR, VENV_PYTHON
+    is_safe = getattr(args, "safe", False)
+    physical_aim_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     
+    if is_safe:
+        BASE_DIR = physical_aim_dir
+        SCRIPTS_DIR = os.path.join(BASE_DIR, "scripts")
+        VENV_PYTHON = os.path.join(BASE_DIR, "venv/bin/python3")
+
     # 1. Pull from Git
     try:
         print("[1/3] Syncing with GitHub...")
-        subprocess.run(["git", "stash"], check=False)
-        subprocess.run(["git", "pull", "origin", "master"], check=True)
-        subprocess.run(["git", "stash", "pop"], check=False)
+        res = subprocess.run(["git", "remote", "-v"], cwd=BASE_DIR, capture_output=True, text=True, check=False)
+        is_aim_repo = "aim-swarm" in res.stdout or "aim.git" in res.stdout
+        
+        if is_safe and not is_aim_repo:
+            print("      [SAFE MODE] Skipping git pull: Physical directory is not the primary A.I.M. repository.")
+        else:
+            subprocess.run(["git", "stash"], cwd=BASE_DIR, check=False)
+            subprocess.run(["git", "pull", "origin", "master"], cwd=BASE_DIR, check=True)
+            subprocess.run(["git", "stash", "pop"], cwd=BASE_DIR, check=False)
     except Exception as e:
         print(f"[ERROR] Git sync failed: {e}")
         return
@@ -730,7 +746,7 @@ def cmd_update(args):
     # 3. Refresh Hooks (Interactive)
     try:
         print("[3/3] Triggering A.I.M. Initializer...")
-        subprocess.run([VENV_PYTHON, os.path.join(SCRIPTS_DIR, "aim_init.py")], check=True)
+        subprocess.run([VENV_PYTHON, os.path.join(SCRIPTS_DIR, "aim_init.py")], cwd=BASE_DIR, check=True)
         print("[SUCCESS] Core engine and TUI updated.")
     except Exception as e:
         print(f"[ERROR] Update process failed: {e}")
@@ -774,7 +790,8 @@ def main():
     subparsers.add_parser("status", help="Show current project momentum")
     subparsers.add_parser("config", aliases=["tui"])
     subparsers.add_parser("core-memory", help="Open the Core Memory block for instant invariant tracking")
-    subparsers.add_parser("update", help="Pull latest code and refresh hooks")
+    update_parser = subparsers.add_parser("update", help="Pull latest code and refresh hooks")
+    update_parser.add_argument("--safe", action="store_true", help="Safe update: skip git pull if current workspace is not the main A.I.M. repository")
     subparsers.add_parser("doctor", help="Run a diagnostic check on system dependencies")
     subparsers.add_parser("health")
     subparsers.add_parser("purge")
