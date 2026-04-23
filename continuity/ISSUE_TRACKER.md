@@ -2,11 +2,6 @@
 
 ## 🟢 OPEN ISSUES (Actionable)
 
-- [ ] **TKT-004: The Orchestrator Protocol**
-  - **Context:** Orchestrator-Agent communication currently lacks structured two-way terminal feedback.
-  - **Failure:** Agents don't know the Orchestrator's session ID, hindering direct terminal responses.
-  - **Intent:** Update `aim_team.py` to pass the Orchestrator's tmux session ID during agent initialization.
-
 ## 🔴 COMPLETED ISSUES (Historical)
 
 - [x] **TKT-003: The Fractal Factory**
@@ -17,6 +12,16 @@
 - [x] **TKT-002: The Blueprint Library**
   - **Context:** Implementing the 'agents/' directory for the V3 Fractal Teams model.
   - **Failure:** Currently lacks a centralized library for specialized agent templates (AGENTS.md, TOOLS.md, engrams/).
+  - **Intent:** Establish a 'python-developer' template in 'agents/' to serve as the DNA for new fractal clones.
+
+- [x] **TKT-005: Project Organization & Role Sealing**
+  - **Context:** `aim-swarm` needs to be organized for self-hosting.
+  - **Intent:** Moved custom scripts to `swarm/` folder and wrote a tailored `AGENTS.md` defining the role of **Swarm Architect** (Agent who creates agents).
+
+- [x] **TKT-001: Architect and implement the Swarm Subagent System (Sovereign Nodes)**
+  - **Context:** `aim-swarm` must be modular and independent. 
+  - **Intent:** Initial V2 implementation of aim_spawn and aim_team (now superseded by V3).
+centralized library for specialized agent templates (AGENTS.md, TOOLS.md, engrams/).
   - **Intent:** Establish a 'python-developer' template in 'agents/' to serve as the DNA for new fractal clones.
 
 - [x] **TKT-005: Project Organization & Role Sealing**

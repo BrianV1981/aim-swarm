@@ -67,10 +67,16 @@ def main():
             continue
 
         # Convert path to absolute if it isn't already or just use as is
-        cmd = f"cd {directory} && gemini --approval-mode=yolo"
+        # Pass the orchestrator session ID to the agent via an environment variable
+        cmd = f"cd {directory} && export ORCHESTRATOR_TMUX_SESSION='{orchestrator_session}' && gemini --approval-mode=yolo"
         
         # 4. Send the initialization commands to each specific pane
         subprocess.run(["tmux", "send-keys", "-t", target_pane, cmd, "C-m"], check=True)
+
+        # 5. Inject the Orchestrator protocol context
+        time.sleep(3) # Wait for the CLI to load
+        identity_prompt = f"[System Context]: You are online. The Orchestrator's TMUX session ID is '{orchestrator_session}'. To reply directly to the Orchestrator, use: tmux paste-buffer -t {orchestrator_session}"
+        send_prompt(target_pane, identity_prompt)
 
     print(f"Successfully launched Swarm Team: {args.team_name} with {len(members)} nodes.")
     
@@ -82,4 +88,13 @@ def main():
         print(f"Run 'tmux attach-session -t {session_name}' to view the dashboard.")
 
 if __name__ == "__main__":
+    main()
+{session_name}'...")
+        os.execlp("tmux", "tmux", "attach-session", "-t", session_name)
+    else:
+        print(f"Run 'tmux attach-session -t {session_name}' to view the dashboard.")
+
+if __name__ == "__main__":
+    main()
+_":
     main()
