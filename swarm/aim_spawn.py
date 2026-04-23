@@ -3,62 +3,82 @@ import argparse
 import os
 import subprocess
 import sys
+import shutil
 
-def create_template(role_name):
-    return f"""# SWARM ROLE: {role_name.upper()} SPECIALIST
+def find_aim_root():
+    current = os.path.abspath(os.getcwd())
+    while current != '/':
+        if os.path.exists(os.path.join(current, "core", "CONFIG.json")) or os.path.exists(os.path.join(current, "setup.sh")):
+            return current
+        current = os.path.dirname(current)
+    return os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-## PRIMARY DIRECTIVE
-You are a highly specialized {role_name.title()} Engineer operating as a sub-agent within the A.I.M. Swarm architecture.
-Your sole focus is the {role_name} layer and tasks related to it.
+BASE_DIR = find_aim_root()
 
-## OPERATING RULES
-1. **Isolation:** You operate strictly within this isolated node directory.
-2. **Autonomy:** Do not modify files outside your node.
-3. **Communication:** When you finish a task, or if you are blocked, clearly state your status in your chat so the Orchestrator (A.I.M.) can read it.
-"""
+def clone_aim_core(node_dir):
+    print(f"Cloning A.I.M. OS to {node_dir}...")
+    # Use git clone --local to quickly copy the repo state
+    subprocess.run(["git", "clone", "--local", BASE_DIR, node_dir], check=True, capture_output=True)
+    
+    # Run clean sweep (remove git, teams, workspace, agents, archive, etc)
+    print("Running clean sweep on clone...")
+    shutil.rmtree(os.path.join(node_dir, ".git"), ignore_errors=True)
+    shutil.rmtree(os.path.join(node_dir, "teams"), ignore_errors=True)
+    shutil.rmtree(os.path.join(node_dir, "workspace"), ignore_errors=True)
+    shutil.rmtree(os.path.join(node_dir, "archive"), ignore_errors=True)
+    shutil.rmtree(os.path.join(node_dir, "agents"), ignore_errors=True)
+    shutil.rmtree(os.path.join(node_dir, "engrams"), ignore_errors=True)
+    shutil.rmtree(os.path.join(node_dir, "continuity"), ignore_errors=True)
+    
+    # Recreate necessary empty directories
+    for d in ["workspace", "archive/raw", "archive/history", "archive/sync", "continuity/private", "engrams"]:
+        os.makedirs(os.path.join(node_dir, d), exist_ok=True)
+
+def inject_blueprint(node_dir, role_name):
+    blueprint_dir = os.path.join(BASE_DIR, "agents", role_name)
+    if not os.path.exists(blueprint_dir):
+        print(f"[WARNING] Blueprint '{role_name}' not found in agents/. Using default templates.")
+        return
+
+    print(f"Injecting blueprint '{role_name}' into clone...")
+    for item in os.listdir(blueprint_dir):
+        s = os.path.join(blueprint_dir, item)
+        d = os.path.join(node_dir, item)
+        if os.path.isdir(s):
+            shutil.copytree(s, d, dirs_exist_ok=True)
+        else:
+            shutil.copy2(s, d)
 
 def main():
-    parser = argparse.ArgumentParser(description="Scaffold a new Sovereign Node for the A.I.M. Swarm.")
-    parser.add_argument("role_name", type=str, help="The role/persona for the new agent (e.g., 'frontend', 'database').")
-    parser.add_argument("--output_dir", type=str, help="Optional custom output directory. Defaults to 'teams/<role_name>_node/'.")
+    parser = argparse.ArgumentParser(description="Scaffold a new Sovereign Node (V3 Fractal Clone) for the A.I.M. Swarm.")
+    parser.add_argument("role_name", type=str, help="The role/persona for the new agent (e.g., 'python-developer').")
+    parser.add_argument("--output_dir", type=str, help="Optional custom output directory. Defaults to 'teams/<role_name>/'.")
     
     args = parser.parse_args()
     role_name = args.role_name
     
     if args.output_dir:
-        node_dir = args.output_dir
+        node_dir = os.path.abspath(args.output_dir)
     else:
-        node_dir = os.path.join("teams", f"{role_name}_node")
+        node_dir = os.path.join(BASE_DIR, "teams", role_name)
         
-    continuity_dir = os.path.join(node_dir, "continuity")
-    gemini_md_path = os.path.join(node_dir, "AGENTS.md")
-    
-    # 1. Directory Scaffolding
-    try:
-        os.makedirs(continuity_dir, exist_ok=True)
-        print(f"Created directories for {node_dir}")
-    except OSError as e:
-        print(f"Error creating directories: {e}")
+    if os.path.exists(node_dir):
+        print(f"Error: Target directory {node_dir} already exists.")
         sys.exit(1)
         
-    # 2. Template Generation
     try:
-        with open(gemini_md_path, "w") as f:
-            f.write(create_template(role_name))
-        print(f"Generated {gemini_md_path}")
-    except OSError as e:
-        print(f"Error writing AGENTS.md: {e}")
-        sys.exit(1)
+        clone_aim_core(node_dir)
+        inject_blueprint(node_dir, role_name)
         
-    # 3. Git Initialization
-    try:
+        # Git Initialization
         subprocess.run(["git", "init"], cwd=node_dir, check=True, capture_output=True)
         print(f"Initialized isolated git repository in {node_dir}")
-    except subprocess.CalledProcessError as e:
-        print(f"Error initializing git repository: {e.stderr.decode('utf-8')}")
-        sys.exit(1)
         
-    print(f"Successfully scaffolded Sovereign Node: {role_name} at {node_dir}")
+        print(f"\n[SUCCESS] Successfully scaffolded Fractal Sovereign Node: {role_name} at {node_dir}")
+        print(f"To initialize this node, run: cd {node_dir} && ./setup.sh")
+    except Exception as e:
+        print(f"Error creating node: {e}")
+        sys.exit(1)
 
 if __name__ == "__main__":
     main()
