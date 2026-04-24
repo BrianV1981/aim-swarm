@@ -1,17 +1,31 @@
-# A.I.M. Swarm
+# A.I.M. Swarm Extension
 
-A synchronous, terminal-native multi-agent orchestration framework built for `tmux` and the Gemini CLI.
+This repository is the **Swarm Orchestration Extension** for the A.I.M. (Actual Intelligent Memory) Operating System. 
 
-## The Philosophy
-While the native A.I.M. architecture relies on background Subagents for deep, invisible delegation, **A.I.M. Swarm** brings the team to the foreground.
+It is designed as a standalone, modular add-on. Rather than mutating the base A.I.M. engine, this repository provides specialized factory scripts, Orchestrator personas, and agent blueprints that run *on top* of a globally installed A.I.M. core.
 
-By orchestrating agents directly within a `tmux` grid, human operators can visually monitor parallel agent reasoning, dynamically interject into the conversation streams, and physically watch the collaborative process unfold in real-time.
+## The Architecture
+By decoupling the swarm logic from the A.I.M. OS, `aim-swarm` serves as a pure orchestration layer:
+1. **The Factory (`swarm/aim_spawn.py`):** Provisions new agents by cloning a fresh, isolated A.I.M. OS from the upstream engine repository, injecting the custom persona blueprint into it, and setting up an asynchronous git-based chalkboard for inter-agent communication.
+2. **The Tmux Orchestrator (`swarm/aim_team.py`):** Splits your terminal into a live grid, booting up each specialized agent in its own isolated pane, and passing session metadata so agents can asynchronously paste multiline responses back to you without UI lockups.
+3. **The Blueprints (`agents/`):** Contains the specialized DNA (instructions, tools, manifests) for different roles (e.g., `python-developer`).
 
-## The Core Mechanisms
-1. **Tmux Pane Grids:** Specialized agents operate in isolated terminal panes.
-2. **Buffer Injection:** Swarm commands are safely loaded into the `tmux` clipboard (`set-buffer`) and pasted instantly (`paste-buffer`), preventing multiline race conditions.
-3. **The Subconscious Escape (`BTab Enter`):** Prompts are officially submitted using `Shift+Tab` followed by `Enter` to escape the Gemini CLI's interactive UI.
-4. **Git Worktree Isolation:** (Coming Soon) Each pane will operate within its own `git worktree` to prevent file system collisions when multiple agents attempt to modify the codebase simultaneously.
+## Installation for A.I.M. Agents
 
-## Usage
-`python3 aim_swarm.py --help`
+If you are an A.I.M. agent tasked with deploying a swarm:
+
+1. Clone this repository into your working directory:
+   ```bash
+   git clone https://github.com/BrianV1981/aim-swarm.git my-swarm-project
+   cd my-swarm-project
+   ```
+2. Review the `AGENTS.md` and `TOOLS.md` files in this repository to adopt the **Swarm Architect** persona.
+3. To spawn a new team member (e.g., the `python-developer`), use the factory script:
+   ```bash
+   python3 swarm/aim_spawn.py python-developer
+   ```
+   *This will clone the base A.I.M. OS into `teams/python-developer/`, inject the blueprint, and set up the GitOps chalkboard.*
+4. Boot the team visually using the Tmux orchestrator:
+   ```bash
+   python3 swarm/aim_team.py default_team
+   ```

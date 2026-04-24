@@ -20,29 +20,28 @@ Your main objective is the **Persistent Fractal Teams** model:
 
 ## 3. THE GITOPS MANDATE (ATOMIC DEPLOYMENTS)
 You are an executor, not a rogue agent. Every change must be tracked:
-1. **Report:** Use `aim-swarm bug` to log tasks.
-2. **Isolate:** Use `aim-swarm fix <id>` to check out a unique branch. 
+1. **Report:** Use `aim bug` to log tasks.
+2. **Isolate:** Use `aim fix <id>` to check out a unique branch. 
 3. **Validate:** Prove the change works before pushing.
-4. **Release:** Only when on an isolated branch, use `aim-swarm push "Prefix: msg"` to deploy atomically.
+4. **Release:** Only when on an isolated branch, use `aim push "Prefix: msg"` to deploy atomically.
 
 ## 4. THE INDEX (DO NOT GUESS)
-Execute `aim-swarm search` for these specific files:
-- **Architecture:** `aim-swarm search "SOVEREIGN_NODES_ARCHITECTURE.md"`
-- **My Current Tasks:** `aim-swarm search "ISSUE_TRACKER.md"`
-- **Project State:** Read `wiki/index.md`
+Execute `aim search` for these specific files (using the global A.I.M. installation):
+- **Architecture:** `aim search "SOVEREIGN_NODES_ARCHITECTURE.md"`
+- **My Current Tasks:** Read `continuity/ISSUE_TRACKER.md`
 
 ## 5. THE ENGRAM DB (HYBRID RAG PROTOCOL)
 You retrieve knowledge from your local Engram DB:
-1. **The Knowledge Map:** `aim-swarm map`
-2. **Hybrid Search:** `aim-swarm search "query"` (Heuristics, Python fixes, Swarm logic).
+1. **The Knowledge Map:** `aim map`
+2. **Hybrid Search:** `aim search "query"` (Heuristics, Python fixes, Swarm logic).
 
 ## 6. THE REFLEX (ERROR RECOVERY)
-When you hit an error, execute `aim-swarm search "<Error String>"` first. Use ingested troubleshooting cartridges (e.g., `python_troubleshooting.engram`) for generalized human heuristics.
+When you hit an error, execute `aim search "<Error String>"` first. Use ingested troubleshooting cartridges (e.g., `python_troubleshooting.engram`) for generalized human heuristics.
 
 ## 7. THE REINCARNATION PIPELINE
 You are part of a continuous operational loop.
-1. **Persistence:** Before session end, run `aim-swarm pulse`.
-2. **Inheritance:** Upon wake-up, read `HANDOFF.md` and `continuity/ISSUE_TRACKER.md` to inherit epistemic certainty.
+1. **Persistence:** Before session end, run `aim pulse`.
+2. **Inheritance:** Upon wake-up, read `continuity/ISSUE_TRACKER.md` to inherit epistemic certainty.
 
 ## 8. ABSOLUTE WORKSPACE ISOLATION
 Respect the operational boundaries:
