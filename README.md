@@ -1,31 +1,31 @@
-# A.I.M. Swarm Extension
+# ⚠️ DEPRECATION NOTICE: The Great Migration
 
-This repository is the **Swarm Orchestration Extension** for the A.I.M. (Actual Intelligent Memory) Operating System. 
+> **IMPORTANT:** This repository (`aim-swarm`) relies on a legacy Python orchestration approach (`aim_spawn.py` / `aim_team.py`) and is officially deprecated.
 
-It is designed as a standalone, modular add-on. Rather than mutating the base A.I.M. engine, this repository provides specialized factory scripts, Orchestrator personas, and agent blueprints that run *on top* of a globally installed A.I.M. core.
+The Sovereign Swarm architecture has been fully integrated into the core A.I.M. Engine via the native `install-agent.sh` flow. 
 
-## The Architecture
-By decoupling the swarm logic from the A.I.M. OS, `aim-swarm` serves as a pure orchestration layer:
-1. **The Factory (`swarm/aim_spawn.py`):** Provisions new agents by cloning a fresh, isolated A.I.M. OS from the upstream engine repository, injecting the custom persona blueprint into it, and setting up an asynchronous git-based chalkboard for inter-agent communication.
-2. **The Tmux Orchestrator (`swarm/aim_team.py`):** Splits your terminal into a live grid, booting up each specialized agent in its own isolated pane, and passing session metadata so agents can asynchronously paste multiline responses back to you without UI lockups.
-3. **The Blueprints (`agents/`):** Contains the specialized DNA (instructions, tools, manifests) for different roles (e.g., `python-developer`).
+Please proceed to **[aim-coagents](https://github.com/BrianV1981/aim-coagents)** — the new central DNA Bank and active Swarm Blueprint repository for A.I.M.
 
-## Installation for A.I.M. Agents
+---
 
-If you are an A.I.M. agent tasked with deploying a swarm:
+### 🧬 The A.I.M. Ecosystem
 
-1. Clone this repository into your working directory:
-   ```bash
-   git clone https://github.com/BrianV1981/aim-swarm.git my-swarm-project
-   cd my-swarm-project
-   ```
-2. Review the `AGENTS.md` and `TOOLS.md` files in this repository to adopt the **Swarm Architect** persona.
-3. To spawn a new team member (e.g., the `python-developer`), use the factory script:
-   ```bash
-   python3 swarm/aim_spawn.py python-developer
-   ```
-   *This will clone the base A.I.M. OS into `teams/python-developer/`, inject the blueprint, and set up the GitOps chalkboard.*
-4. Boot the team visually using the Tmux orchestrator:
-   ```bash
-   python3 swarm/aim_team.py default_team
-   ```
+All core architectural decisions, memory logic, and central integrations are actively developed across the following modular ecosystem repositories:
+
+**Core Engines:**
+- **[aim-agy](https://github.com/BrianV1981/aim-agy):** The Core Engine (Built for Antigravity CLI). *This is the flagship repository.*
+- **[aim-opencode](https://github.com/BrianV1981/aim-opencode):** Core adaptation for the OpenCode ecosystem.
+- **[aim-codex](https://github.com/BrianV1981/aim-codex):** The upcoming Codex-native workspace.
+
+**Tools & Workspaces:**
+- **[aim-connect](https://github.com/BrianV1981/aim-connect):** The 100% self-hosted remote workspace web UI.
+- **[aim-tmux-dashboard](https://github.com/BrianV1981/aim-tmux-dashboard):** The terminal-based monitoring dashboard.
+- **[aim-flight-recorder](https://github.com/BrianV1981/aim-flight-recorder):** The forensic Markdown session extractor.
+- **[aim-boardroom](https://github.com/BrianV1981/aim-boardroom):** The multi-agent orchestration room bridging OS-level multiplexing.
+
+**Extensions & Lore:**
+- **[aim-coagents](https://github.com/BrianV1981/aim-coagents):** The central DNA Bank for Sovereign Swarm blueprints.
+- **[aim-knowledge](https://github.com/BrianV1981/aim-knowledge):** The massive public Obsidian Vault and deep-lore archive.
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+☕ **Support the project:** [Buy Me a Coffee](https://buymeacoffee.com/brianv1981)
