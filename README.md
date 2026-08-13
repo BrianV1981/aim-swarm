@@ -1,3 +1,6 @@
+> ⚠️ **DEPRECATED**: This repository has been officially deprecated. The A.I.M. ecosystem has unified its active CLI vessels under a single, agnostic operating system. Please direct all usage and reference to **[J.O.S.H.U.A. (aim-joshua)](https://github.com/BrianV1981/aim-joshua)**.
+
+
 # ⚠️ DEPRECATION NOTICE: The Great Migration
 
 > **IMPORTANT:** This repository (`aim-swarm`) relies on a legacy Python orchestration approach (`aim_spawn.py` / `aim_team.py`) and is officially deprecated.
