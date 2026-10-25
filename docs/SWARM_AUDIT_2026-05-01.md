@@ -57,7 +57,7 @@ This is the **primary orchestrator** — the file that boots a swarm team from `
 
 ### swarm/aim_spawn.py — **WRONG SOURCE**
 
-The factory provisions new agent nodes by cloning the base A.I.M. OS. But `find_aim_root()` walks up from the script location looking for `core/CONFIG.json` or `setup.sh` — neither exists in `aim-swarm`. The fallback resolves to `/home/kingb/aim-swarm` itself. Result: it clones `aim-swarm` into the new node, not the A.I.M. OS engine.
+The factory provisions new agent nodes by cloning the base A.I.M. OS. But `find_aim_root()` walks up from the script location looking for `core/CONFIG.json` or `setup.sh` — neither exists in `aim-swarm`. The fallback resolves to `~/aim-swarm` itself. Result: it clones `aim-swarm` into the new node, not the A.I.M. OS engine.
 
 Other issues:
 - Clean sweep removes `.git`, then runs `git init` — but after cloning the wrong repo, the directory is nearly empty

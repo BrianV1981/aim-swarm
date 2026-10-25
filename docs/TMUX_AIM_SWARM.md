@@ -105,14 +105,14 @@ tmux send-keys -t <agent_name> Enter
 
 ```bash
 # OpenCode persistent co-agent (correct — bare TUI, injected prompt)
-tmux new-session -d -s aim_opencode_builder -c /home/kingb/aim-opencode opencode
+tmux new-session -d -s aim_opencode_builder -c ~/aim-opencode opencode
 sleep 3
 tmux set-buffer "Read AGENTS.md and docs/aim-opencode-transition.md. Begin Phase 2, Issue #1."
 tmux paste-buffer -t aim_opencode_builder
 tmux send-keys -t aim_opencode_builder Enter
 
 # Gemini CLI persistent co-agent (correct — bare YOLO, injected prompt)
-tmux new-session -d -s wiki_agent -c /home/kingb/aim gemini --yolo
+tmux new-session -d -s wiki_agent -c ~/aim gemini --yolo
 sleep 3
 tmux set-buffer "You are the Wiki Scribe. Process files in memory-wiki/_ingest/."
 tmux paste-buffer -t wiki_agent
@@ -292,7 +292,7 @@ teams/
 ### 5.2 Spawning Into a Workspace
 
 ```bash
-tmux new-session -d -s python_spec -c /home/kingb/aim-swarm/teams/python-specialist gemini --yolo
+tmux new-session -d -s python_spec -c ~/aim-swarm/teams/python-specialist gemini --yolo
 ```
 
 The agent's `$PWD` is its isolated workspace. Paths it references are relative to that directory.
@@ -329,7 +329,7 @@ Spawn agent on a task, do other work, join to check progress:
 
 ```bash
 # Spawn
-tmux new-session -d -s benchmark_runner -c /home/kingb/aim gemini --yolo
+tmux new-session -d -s benchmark_runner -c ~/aim gemini --yolo
 tmux set-buffer "Run the full locomo benchmark suite. Save results to benchmarks/locomo/results.json."
 tmux paste-buffer -t benchmark_runner
 tmux send-keys -t benchmark_runner Enter
@@ -442,7 +442,7 @@ tmux list-panes -t <name> -F "#{pane_pid}" | xargs ps -p
 # Co-agent wiki scribe deployment
 
 SCRIBE_NAME="wiki_scribe"
-SCRIBE_DIR="/home/kingb/aim-swarm/teams/wiki-scribe"
+SCRIBE_DIR="~/aim-swarm/teams/wiki-scribe"
 
 # 1. Check if already alive
 if tmux has-session -t "$SCRIBE_NAME" 2>/dev/null; then
